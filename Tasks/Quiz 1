@@ -98,30 +98,7 @@ BEGIN
     END IF;
 END;
 
-2. 
-CREATE OR REPLACE TYPE skill_record_type AS OBJECT (
-    skill_name VARCHAR2(50)
-);
-
-CREATE OR REPLACE TYPE employee_skills_type AS TABLE OF skill_record_type;
-
-DECLARE
-    employee_skills employee_skills_type := employee_skills_type();
-
-BEGIN
-    employee_skills.EXTEND(5);
-
-    employee_skills(1) := skill_record_type('John', 'Java');
-    employee_skills(2) := skill_record_type('Alice', 'Python');
-    employee_skills(3) := skill_record_type('Bob', 'SQL');
-    employee_skills(4) := skill_record_type('Emma', 'JavaScript');
-    employee_skills(5) := skill_record_type('Mike', 'C++');
-
-    FOR i IN 1..employee_skills.COUNT LOOP
-        DBMS_OUTPUT.PUT_LINE('Employee Name: ' || employee_skills(i).skill_name ||
-                             ', Skill: ' || employee_skills(i).skill_name);
-    END LOOP;
-END;
+2. ?
 
 3. REF KURSOR dinamik nəticə dəstlərini idarə etmək üçün istifadə olunur və nəticə dəstinin strukturu əvvəlcədən məlum olmadıqda xüsusilə faydalıdır. 
 Digər tərəfdən, REF məlumat növü obyektlər arasında əlaqələr qurmaq və obyekt cədvəlində xüsusi sətirlərə və ya nümunələrə istinad etmək üçün istifadə olunur. 
