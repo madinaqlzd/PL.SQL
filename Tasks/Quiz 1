@@ -1,0 +1,135 @@
+**Quiz Questions:**
+1. Scalar Data Types:
+What is the purpose of the NUMBER data type in PL/SQL?
+    A. To store large text data.
+    B. To store binary data.
+    C. To store numeric values.
+    D. To store date and time information.
+2. Composite Data Types:
+What does the VARRAY data type represent in PL/SQL?
+    A. A variable-size array.
+    B. A fixed-size array.
+    C. A reference to a cursor.
+    D. A collection of LOB types.
+3. Reference Data Types:
+What is the purpose of the REF CURSOR data type in PL/SQL?
+    A. To store binary data.
+    B. To create references to objects in the database.
+    C. To return query results from procedures and functions.
+    D. To store character data.
+4. LOB Data Types:
+Which data type is suitable for storing large amounts of character data in PL/SQL?
+    A. CLOB
+    B. BLOB
+    C. NCLOB
+    D. VARCHAR2
+5. Collection Data Types:
+Which collection data type allows you to access elements using a unique key in PL/SQL?
+    A. Nested Table
+    B. VARRAY
+    C. Associative Array (PL/SQL Table)
+    D. REF CURSOR
+6. Scalar Data Types:
+Which data type is used to store character data with a fixed length in PL/SQL?
+    A. VARCHAR2
+    B. CHAR
+    C. BOOLEAN
+    D. DATE
+7. Composite Data Types:
+What is the purpose of the RECORD data type in PL/SQL?
+    A. To store multiple rows of data.
+    B. To create user-defined functions.
+    C. To define custom data structures.
+    D. To perform date and time arithmetic.
+8. Reference Data Types:
+How does the REF data type in PL/SQL differ from a REF CURSOR?
+    A. REF CURSOR is used for dynamic queries, while REF is used for referencing objects.
+    B. REF is used for dynamic queries, while REF CURSOR is used for referencing objects.
+    C. They are the same and can be used interchangeably.
+    D. Both are used for referencing objects.
+9. LOB Data Types:
+What is the purpose of the BFILE data type in PL/SQL?
+    A. To store large text data.
+    B. To store binary data.
+    C. To store references to external binary files.
+    D. To store large amounts of character data.
+10. Collection Data Types:
+What happens if you try to access an element beyond the bounds of a VARRAY in PL/SQL?
+    A. It raises an exception.
+    B. It automatically extends the VARRAY to accommodate the new element.
+    C. It discards the existing elements to make room for the new element.
+    D. It returns NULL for the out-of-bounds element.
+    
+**Open-Format Questions:**
+1. Scalar Data Types:
+**Open Format:** Explain the purpose of the BOOLEAN data type in PL/SQL and provide a practical example of how it can be used in a conditional statement.
+2. Composite Data Types:
+**Open Format:** Create a Nested Table in PL/SQL named `employee_skills` to store the skills of five employees. Populate the Nested Table with employee names and their respective skills. Display the contents of the Nested Table.
+3. Reference Data Types:
+**Open Format:** Describe the differences between the REF CURSOR and the REF data types in PL/SQL and provide specific use cases where each type would be more suitable.
+4. LOB Data Types:
+**Open Format:** Explain the purpose of the CLOB data type in PL/SQL and provide a real-world use case where it would be beneficial.
+5. Collection Data Types:
+**Open Format:** Compare and contrast VARRAY, Nested Table, and Associative Array (PL/SQL Table) in terms of their usage, limitations, and scenarios where each would be more appropriate.
+
+**ANSWERS**
+1. c
+2. a
+3. c
+4. c
+5. c
+6. a
+7. b
+8. a
+9. b
+10. a
+
+1. PL/SQL dili içində BOOLEAN veri tipinin məqsədi, yalnız doğru (TRUE) və yanlış (FALSE) qiymətlərini saxlamaqdır. 
+Bu tip əksər hallarda proqramın axış nəzarəti və şərt ifadələrində istifadə olunur.
+
+DECLARE
+    x BOOLEAN := TRUE;
+    y BOOLEAN := FALSE;
+BEGIN
+    IF x THEN
+        DBMS_OUTPUT.PUT_LINE('x düzdür.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('x səfdir.');
+    END IF;
+END;
+
+2. 
+CREATE OR REPLACE TYPE skill_record_type AS OBJECT (
+    skill_name VARCHAR2(50)
+);
+
+CREATE OR REPLACE TYPE employee_skills_type AS TABLE OF skill_record_type;
+
+DECLARE
+    employee_skills employee_skills_type := employee_skills_type();
+
+BEGIN
+    employee_skills.EXTEND(5);
+
+    employee_skills(1) := skill_record_type('John', 'Java');
+    employee_skills(2) := skill_record_type('Alice', 'Python');
+    employee_skills(3) := skill_record_type('Bob', 'SQL');
+    employee_skills(4) := skill_record_type('Emma', 'JavaScript');
+    employee_skills(5) := skill_record_type('Mike', 'C++');
+
+    FOR i IN 1..employee_skills.COUNT LOOP
+        DBMS_OUTPUT.PUT_LINE('Employee Name: ' || employee_skills(i).skill_name ||
+                             ', Skill: ' || employee_skills(i).skill_name);
+    END LOOP;
+END;
+
+3. REF KURSOR dinamik nəticə dəstlərini idarə etmək üçün istifadə olunur və nəticə dəstinin strukturu əvvəlcədən məlum olmadıqda xüsusilə faydalıdır. 
+Digər tərəfdən, REF məlumat növü obyektlər arasında əlaqələr qurmaq və obyekt cədvəlində xüsusi sətirlərə və ya nümunələrə istinad etmək üçün istifadə olunur. 
+Hər bir növ fərqli məqsədlərə xidmət edir və proqramın və ya verilənlər bazası dizaynının xüsusi tələbləri əsasında seçilməlidir.
+
+4. PL/SQL-də CLOB məlumat növü böyük həcmdə mətn məlumatlarını idarə etmək və saxlamaq lazım olduqda dəyərlidir və məzmun idarəetmə sistemlərində, 
+jurnalın idarə edilməsində, məlumat mübadiləsində və böyük mətn sənədlərinin saxlanması və işlənməsinin mümkün olduğu digər ssenarilərdə geniş istifadə olunur. vacibdir.
+
+5. VARRAY: Elementlərin maksimum sayı məlum olan sabit ölçülü massiv lazım olduqda istifadə edin.
+Nested Table: İş vaxtı ərzində böyüyə və ya kiçilə bilən dinamik, qeyri-məhdud massiv lazım olduqda istifadə edin.
+Associative Array (PL/SQL Table): Tez axtarışlar və PL/SQL blokları daxilində müvəqqəti məlumatların saxlanması üçün unikal düymələri olan kolleksiyaya ehtiyacınız olduqda istifadə edin.
