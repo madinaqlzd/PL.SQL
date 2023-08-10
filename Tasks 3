@@ -45,3 +45,61 @@ begin
   v_fullName := v_firstName || ' ' || v_lastName;
   DBMS_OUTPUT.PUT_LINE(v_fullName);
 end;
+
+--6. Task: Declare a number variable v_age. If v_age is greater than 18, print "Adult". Otherwise, print "Minor".
+SET SERVEROUTPUT ON
+declare
+  v_age number:= 20;
+begin
+if v_age >18 then
+  dbms_output.put_line('Adult');
+else
+  dbms_output.put_line('Minor');
+end if;
+end;
+
+--7. Task: Declare a number variable v_counter and initialize it with 1. 
+--Write a loop that outputs the numbers from 1 to 5 using this variable.
+declare
+  v_counter number:= 1;
+begin
+  for v_counter in 1..5 loop
+    dbms_output.put_line(v_counter);
+  end loop;
+end;
+
+--8. Task: Declare a number variable v_dividend and v_divisor. Initialize v_divisor with 0. 
+--Try dividing v_dividend by v_divisor and handle any exceptions to print "Cannot divide by zero".
+declare 
+  v_dividend number:=5;
+  v_divisor number:=0;
+  v_result number;
+begin
+  v_result := v_dividend / v_divisor;
+  dbms_output.put_line(v_result);
+exception
+  when zero_divide then
+    dbms_output.put_line('Cannot divide by zero');
+end;
+
+--9. Task: Declare a string variable v_text and initialize it with "oracle". 
+--Convert the string to uppercase and then output the result.
+declare 
+  v_text varchar2(50):='oracle';
+  v_upper varchar(50):= upper(v_text);
+begin
+  dbms_output.put_line(v_upper);
+end;
+
+--10. Task: Write an anonymous block that declares a number variable v_outerVar and initializes it with 100. 
+--Within this block, declare another nested anonymous block that declares a variable v_innerVar and initializes it with 200. 
+--Output both variables from the inner block.
+declare
+  v_outerVar number:= 100;
+begin
+  declare
+    v_innerVar number:= 200;
+  begin
+    DBMS_OUTPUT.PUT_LINE(v_outerVar || ' and ' || v_innerVar);
+  end;
+end;
