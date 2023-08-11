@@ -1,0 +1,82 @@
+--1. Task: Create a procedure called proc_display that simply prints "Hello from Procedure!".
+SET SERVEROUTPUT ON
+create or replace procedure proc_display as
+begin
+  DBMS_OUTPUT.PUT_LINE('Hello from Procedure!');
+end proc_display;
+
+--2. Task: Create a procedure proc_greet that takes a v_name parameter and prints "Hello, [v_name]!".
+create or replace procedure proc_greet(v_name VARCHAR2) as
+begin
+  DBMS_OUTPUT.PUT_LINE('Hello, [v_name]!');
+end proc_greet;
+
+--3. Task: Create a function func_square that takes a number as an argument and returns its square.
+create or replace function func_square(a_number NUMBER) RETURN number is a_square number;
+begin
+  a_square:= a_number*a_number;
+  RETURN a_square;
+end func_square;
+
+--4. Task: Write a function func_upper that takes a string and returns its uppercase version.
+create or replace function func_upper(a_string varchar2) RETURN varchar2 is a_upper varchar2(50);
+begin
+  a_upper:= upper(a_string);
+  RETURN a_upper;
+end func_upper;
+
+--5. Task: Create a procedure proc_fullname that takes v_firstName and v_lastName as parameters and prints the full name.
+create or replace procedure proc_fullname(v_firstName varchar2, v_lastName varchar2) as
+begin
+  DBMS_OUTPUT.PUT_LINE(v_firstName || ' ' || v_lastName);
+end proc_fullname;
+
+--6. Task: Write a function func_ageGroup that takes an age as a parameter and returns 'Child' if age is less than 18, 'Adult' otherwise.
+create or replace function func_ageGroup(a_age NUMBER) RETURN varchar is a_age_group VARCHAR2(20);
+begin
+    if a_age < 18 then
+        a_age_group := 'Child';
+    else
+        a_age_group := 'Adult';
+    end if;
+    return a_age_group;
+end func_ageGroup;
+
+--7. Task: Create a procedure proc_displayNumbers that takes a number n and prints numbers from 1 to n.
+create or replace procedure proc_displayNumbers(n number) as
+begin
+    for i in 1..n loop
+        DBMS_OUTPUT.PUT_LINE(i);
+    end loop;
+end proc_displayNumbers;
+
+--8. Task: Write a function func_calculateArea that takes the radius of a circle as an argument and returns its area.
+create or replace function func_calculateArea(a_radius number) return number is
+    a_area number;
+begin
+    a_area := 3.14159 * a_radius * a_radius;
+    return a_area;
+end func_calculateArea;
+
+--9. Task: Create a procedure proc_divide that takes two numbers and prints their division result. 
+--It should handle division by zero and print an error message for it.
+create or replace procedure proc_divide(a number, b number) as ab_result number;
+begin
+    if b = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('Error: Division by zero.');
+    else
+        ab_result := a / b;
+        DBMS_OUTPUT.PUT_LINE(ab_result);
+    end if;
+exception
+    when zero_divide then
+        DBMS_OUTPUT.PUT_LINE('Error');
+end proc_divide;
+
+--10. Task: Write a function func_daysDifference that takes two dates as arguments and returns the number of days between them.
+create or replace function func_daysDifference(p_date1 date, p_date2 date) return number is 
+    v_days number;
+begin
+    v_days := p_date2 - p_date1;
+    return abs(v_days);
+end func_daysDifference;
